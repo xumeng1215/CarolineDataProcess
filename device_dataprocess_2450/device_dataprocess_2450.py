@@ -132,7 +132,7 @@ def process(csv_file):
     # output the values to result file
     with open(result_file, 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow([csv_file, jsc, voc, pmax, ff, pce])
+        writer.writerow([csv_file, csv_file.split(' ')[0], jsc, voc, pmax, ff, pce])
     # return a dictionary
     return {"isc": isc, "voc": voc, "pmax": pmax, "jsc": jsc, "pce": pce, "ff": ff}
 
@@ -153,7 +153,7 @@ print("{:>20} {:>20} {:>20} {:>20} {:>20} {:>20}".format("Device Name",
 # and to result file for record
 with open(result_file, 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
-    writer.writerow(["Device Name", "Jsc (mA/cm^2)", "Voc (V)",
+    writer.writerow(["CSV File", "Cell Code", "Jsc (mA/cm^2)", "Voc (V)",
                     "Pmax (mW/cm^2)", "FF (%)", "PCE (%)"])
 
 
