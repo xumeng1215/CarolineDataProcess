@@ -125,6 +125,11 @@ def process(csv_file):
     #
     ff = pmax * 100 / (jsc*voc)
 
+    # get substrate number and cell code
+    cell = csv_file.split(' ')[0]
+    substrate_number = cell.split('_')[0]
+    cell_code = cell.split('_')[1]
+
     # output the values in console
     print("{:20} {:20.4f} {:20.4f} {:20.4f} {:20.4f} {:20.4f}".format(csv_file,
                                                                       jsc, voc, pmax, ff, pce))
@@ -132,7 +137,7 @@ def process(csv_file):
     # output the values to result file
     with open(result_file, 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow([csv_file, csv_file.split(' ')[0], jsc, voc, pmax, ff, pce])
+        writer.writerow([csv_file, substrate_number, cell_code, jsc, voc, pmax, ff, pce])
     # return a dictionary
     return {"isc": isc, "voc": voc, "pmax": pmax, "jsc": jsc, "pce": pce, "ff": ff}
 
@@ -153,7 +158,7 @@ print("{:>20} {:>20} {:>20} {:>20} {:>20} {:>20}".format("Device Name",
 # and to result file for record
 with open(result_file, 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
-    writer.writerow(["CSV File", "Cell Code", "Jsc (mA/cm^2)", "Voc (V)",
+    writer.writerow(["CSV File", "Substrate Number", "Cell Code", "Jsc (mA/cm^2)", "Voc (V)",
                     "Pmax (mW/cm^2)", "FF (%)", "PCE (%)"])
 
 
